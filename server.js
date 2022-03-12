@@ -118,6 +118,7 @@ app.post("/api/pay", async (req, res) => {
       lastName: req.body.lastName,
       phone: req.body.phone,
       status: "pending",
+      amount
 
     });
     dbObj.conn.close();
@@ -149,6 +150,7 @@ app.post("/api/callback", async (req, res) => {
       let dbObj = await getDBObject();
       await dbObj.db.collection(db).updateOne({ "orderId": orderId }, {
         $set: {
+          "amount": response.responseObject.body.txnAmount,
           "status": "success",
           "bankid": response.responseObject.body.bankTxnId,
           "txnDate": response.responseObject.body.txnDate,
@@ -187,6 +189,7 @@ app.get("/api/confirmation/:orderId", async (req, res) => {
       "txnId": obj.txnId,
       "txnDate": obj.txnDate,
       "amount": obj.amount,
+      "status":obj.status
     });
   } catch { }
 });

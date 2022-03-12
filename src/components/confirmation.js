@@ -24,7 +24,7 @@ export default function Confirmation() {
             setErrorMsg(err.response !== undefined ? String(err) : String(err))
             // setLoading(false);
         }
-    }, [])
+    }, [id])
 
     return (
         <main className="main">
@@ -36,7 +36,7 @@ export default function Confirmation() {
                         <div className="eventdetails">
                             <p className="eventdetails_dnt">Event Registration Confirmation</p>
                             <h3 className="eventdetails_title">Introduction to CryptoCurrency</h3>
-                            {data.status !== undefined || data.status === "success" ? <p className="eventdetails_des">Thank you for registering for the event. A copy of the receipt has been sent to your registered email</p>:
+                            {data.status !== undefined && data.status === "success" ? <p className="eventdetails_des">Thank you for registering for the event. A copy of the receipt has been sent to your registered email</p>:
                              <p className="eventdetails_des red">{data.status !== "failed"?"The payment is yet to be recieved":"The transaction has failed"}</p>
                             }
                             {/* <p className="confirm"></p> */}
@@ -47,7 +47,7 @@ export default function Confirmation() {
                                 {data.orderId !== undefined ?
                                     <><p>Order Id</p> <p>{data.orderId}</p></> : null}
                                 {data.txnId !== undefined ?
-                                    <><p>Transaction</p> <p>{data.txnId}</p></> : null}
+                                    <><p>Transaction Id</p> <p>{data.txnId}</p></> : null}
                                 {data.status !== undefined ?
                                     <><p>Payment Status</p> <p className={data.status}>{data.status}</p></> : null}
                                 {data.amount !== undefined ?
