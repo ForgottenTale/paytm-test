@@ -22,7 +22,6 @@ dotenv.config();
 
 const url =process.env.DBNAME;
 const db = "paytm";
-// const clGameRooms = "GameRooms";
 
 async function getDBObject() {
   var conn = await MongoClient.connect(url, {
@@ -82,8 +81,7 @@ app.post("/pay", async (req, res) => {
     userInfo.setFirstName(req.body.firstName);
     userInfo.setLastName(req.body.lastName);
     userInfo.setMobile(req.body.phone);
-    // userInfo.setPincode(req.body.pin);
-    // userInfo.setAddress(req.body.address);
+
     var paymentDetailBuilder = new Paytm.PaymentDetailBuilder(
       channelId,
       orderId,
@@ -93,10 +91,6 @@ app.post("/pay", async (req, res) => {
     var paymentDetail = paymentDetailBuilder.build();
     var response = await Paytm.Payment.createTxnToken(paymentDetail);
 
-    // if (response instanceof Paytm.SDKResponse) {
-    //     console.log("\nRaw Response:\n", response.getJsonResponse());
-    // }
-    // console.log("\nResponse:\n", response);
     let amount="10.00";
     var details = {
       mid: process.env.Merchant_Id,
@@ -115,7 +109,7 @@ app.post("/pay", async (req, res) => {
       phone: req.body.phone,
     });
     dbObj.conn.close();
-    // console.log(details);
+    console.log(details);
     res.send(details);
   } catch (err) {
     console.log(err);
