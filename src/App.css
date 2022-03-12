@@ -101,6 +101,15 @@ a {
   font-size: 16px;
   font-weight: 500;
 }
+.red,.failed{
+  color: red;
+}
+.pending{
+  color: yellow;
+}
+.success{
+  color: rgb(16, 255, 144);
+}
 @media only screen and (max-width: 768px) {
 
   .eventform_con{

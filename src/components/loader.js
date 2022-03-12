@@ -4,7 +4,7 @@ export default function Loader({ msg }) {
     return (
         <div className='loader'>
             <div className="snippet" data-title=".dot-falling">
-                <div class="stage">
+                <div className="stage">
                     <div className="dot-falling"></div>
                 </div>
             </div>

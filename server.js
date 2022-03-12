@@ -16,12 +16,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.options("*", cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/static", express.static(path.join(__dirname, "./build//static")));
-app.get("/", function (req, res) {
-  res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
-});
-// app.use(express.static(path.join(__dirname,'build')));
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(__dirname + '/public'));
 
 const url = process.env.DBNAME;
 const db = "paytm";
@@ -110,6 +106,8 @@ app.post("/api/pay", async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
+      status: "pending",
+
     });
     dbObj.conn.close();
     console.log(details);
@@ -167,7 +165,7 @@ app.post("/api/callback", async (req, res) => {
     console.log(err);
   }
 });
-app.get("/api/status/:orderId", async (req, res) => {
+app.get("/api/confirmation/:orderId", async (req, res) => {
   try {
     const orderid = req.params.orderId;
     let dbObj = await getDBObject();
@@ -181,6 +179,13 @@ app.get("/api/status/:orderId", async (req, res) => {
     });
   } catch { }
 });
+
+// app.get("/", function (req, res) {
+//   res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
+// });
+app.get('*', (req, res) => {
+  res.sendFile(process.cwd() + '/build/index.html');
+})
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT}`)
 );

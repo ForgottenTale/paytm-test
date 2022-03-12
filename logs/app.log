@@ -272,3 +272,89 @@
 [2022-03-12T17:52:09.863Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
 [2022-03-12T17:52:20.595Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
 [2022-03-12T17:52:20.596Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:09:04.894Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:09:04.894Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:09:35.781Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:09:35.781Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:11:25.831Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:11:25.832Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:13:01.663Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:13:01.664Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:14:35.168Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:14:35.169Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:14:55.603Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:14:55.604Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:15:17.726Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:15:17.726Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:15:36.854Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:15:36.855Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:17:42.170Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:17:42.171Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:18:40.964Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:18:40.965Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:19:04.551Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:19:04.552Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:19:35.034Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Payment>: In createTxnToken PaymentDetail: {"channelId":"WEB","orderId":"QEMS14B3T","txnAmount":{"currency":"INR","value":"10.00"},"userInfo":{"custId":"6E4RB5P6CB","email":"a@g.cop","firstName":"123456","lastName":"sdf","mobile":"6841"},"readTimeout":80000}
+[2022-03-12T18:19:35.034Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Payment>: validatePaymentDetailsObject for object: {"channelId":"WEB","orderId":"QEMS14B3T","txnAmount":{"currency":"INR","value":"10.00"},"userInfo":{"custId":"6E4RB5P6CB","email":"a@g.cop","firstName":"123456","lastName":"sdf","mobile":"6841"},"readTimeout":80000}
+[2022-03-12T18:19:35.035Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Payment>:  validatePaymentDetailsObject returns true 
+[2022-03-12T18:19:35.035Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <CommonUtil>: In getSecureRequestHeader
+[2022-03-12T18:19:35.036Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Payment>: InitiateTransactionRequest object {"head":{"version":"v2","channelId":"WEB","requestTimestamp":"1647109175035","signature":null},"body":{"requestType":"Payment","mid":"ciXcUt86833610141591","orderId":"QEMS14B3T","websiteName":"C1","txnAmount":{"currency":"INR","value":"10.00"},"userInfo":{"custId":"6E4RB5P6CB","email":"a@g.cop","firstName":"123456","lastName":"sdf","mobile":"6841"},"callbackUrl":"http://localhost:5000/api/callback"}}
+[2022-03-12T18:19:35.036Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <EncDecUtil>: generateSignature() called
+[2022-03-12T18:19:35.036Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <EncDecUtil>: generateRandomString() called
+[2022-03-12T18:19:35.037Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <EncDecUtil>: generateSalt returns: nhiu
+[2022-03-12T18:19:35.040Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <EncDecUtil>: getChecksumFromString returns: n20UsBASGTGLl/d7OgAE6a/9x+E+toZEuqkzb8ORI/SngCr385cqGIWbCzyCrb1uHMicIkSWePjXpJgM8YKmjukuAsOa+4Y+noffWOUisCU=
+[2022-03-12T18:19:35.041Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: process for request: {"head":{"version":"v2","channelId":"WEB","requestTimestamp":"1647109175035","signature":"n20UsBASGTGLl/d7OgAE6a/9x+E+toZEuqkzb8ORI/SngCr385cqGIWbCzyCrb1uHMicIkSWePjXpJgM8YKmjukuAsOa+4Y+noffWOUisCU="},"body":{"requestType":"Payment","mid":"ciXcUt86833610141591","orderId":"QEMS14B3T","websiteName":"C1","txnAmount":{"currency":"INR","value":"10.00"},"userInfo":{"custId":"6E4RB5P6CB","email":"a@g.cop","firstName":"123456","lastName":"sdf","mobile":"6841"},"callbackUrl":"http://localhost:5000/api/callback"}}
+[2022-03-12T18:19:35.041Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: executeCurl called 
+[2022-03-12T18:19:35.041Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: will make API call to: https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=ciXcUt86833610141591&orderId=QEMS14B3T
+[2022-03-12T18:19:36.206Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: API response received upon successful execution: {"head":{"responseTimestamp":"1647109176274","version":"v1","signature":"0mGHXDmfJV9DXRzcCmOw31wzVySV741JqzNdeEkju6xuUnB0VQ7S8OIXTCUxeQue/U6NyZ2s6rZWgKnpnp+p/WMN600K9Bc1aXkCTTT6Hgw="},"body":{"resultInfo":{"resultStatus":"S","resultCode":"0000","resultMsg":"Success"},"txnToken":"78979a6929d84fc7a28ff0cbe83998fc1647109175531","isPromoCodeValid":false,"authenticated":false}}
+[2022-03-12T18:19:36.207Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: Raw Response: {"head":{"responseTimestamp":"1647109176274","version":"v1","signature":"0mGHXDmfJV9DXRzcCmOw31wzVySV741JqzNdeEkju6xuUnB0VQ7S8OIXTCUxeQue/U6NyZ2s6rZWgKnpnp+p/WMN600K9Bc1aXkCTTT6Hgw="},"body":{"resultInfo":{"resultStatus":"S","resultCode":"0000","resultMsg":"Success"},"txnToken":"78979a6929d84fc7a28ff0cbe83998fc1647109175531","isPromoCodeValid":false,"authenticated":false}}
+[2022-03-12T18:19:36.208Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: Response Data Object: {"head":{"signature":"0mGHXDmfJV9DXRzcCmOw31wzVySV741JqzNdeEkju6xuUnB0VQ7S8OIXTCUxeQue/U6NyZ2s6rZWgKnpnp+p/WMN600K9Bc1aXkCTTT6Hgw=","responseTimestamp":"1647109176274","version":"v1"},"body":{"txnToken":"78979a6929d84fc7a28ff0cbe83998fc1647109175531","isPromoCodeValid":false,"resultInfo":{"resultStatus":"S","resultMsg":"Success","resultCode":"0000"},"extraParamsMap":{}}}
+[2022-03-12T18:19:36.208Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: validating signature 
+[2022-03-12T18:19:36.208Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <EncDecUtil>: verifyChecksumByString called()
+[2022-03-12T18:19:36.208Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <EncDecUtil>: verifyChecksumByString returns: true
+[2022-03-12T18:19:36.208Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: signature validation passed 
+[2022-03-12T18:19:36.208Z] [PAYTM] INFO [NODE-SDK:1.0.0:d5702559-60b8-4273-923f-ad0ebcea0f58] <Request>: Execution completed with raw json response: {"head":{"responseTimestamp":"1647109176274","version":"v1","signature":"0mGHXDmfJV9DXRzcCmOw31wzVySV741JqzNdeEkju6xuUnB0VQ7S8OIXTCUxeQue/U6NyZ2s6rZWgKnpnp+p/WMN600K9Bc1aXkCTTT6Hgw="},"body":{"resultInfo":{"resultStatus":"S","resultCode":"0000","resultMsg":"Success"},"txnToken":"78979a6929d84fc7a28ff0cbe83998fc1647109175531","isPromoCodeValid":false,"authenticated":false}}
+[2022-03-12T18:19:45.288Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Payment>: In getPaymentStatus PaymentStatusDetail: {"orderId":"QEMS14B3T","readTimeout":80000}
+[2022-03-12T18:19:45.288Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Payment>: validatePaymentStatusDetailObject for request: {"orderId":"QEMS14B3T","readTimeout":80000}
+[2022-03-12T18:19:45.289Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Payment>:  validatePaymentStatusDetailObject returns true 
+[2022-03-12T18:19:45.289Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <CommonUtil>: In getSecureRequestHeader
+[2022-03-12T18:19:45.289Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Payment>: NativePaymentStatusRequest object {"head":{"version":"v2","channelId":null,"requestTimestamp":"1647109185289","workFlow":null,"signature":null},"body":{"mid":"ciXcUt86833610141591","orderId":"QEMS14B3T"}}
+[2022-03-12T18:19:45.289Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <EncDecUtil>: generateSignature() called
+[2022-03-12T18:19:45.290Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <EncDecUtil>: generateRandomString() called
+[2022-03-12T18:19:45.290Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <EncDecUtil>: generateSalt returns: n9hA
+[2022-03-12T18:19:45.291Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <EncDecUtil>: getChecksumFromString returns: iO/uU/OFP6/vBjs0F18J5tN24hel/HwZiPBKuTUMn4OJdXwjH3exHwXX43/HNLo9MrjgzAX1080WgNuPdHmZeX72vHBJJ/sZqc2f3tjoNXE=
+[2022-03-12T18:19:45.291Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: process for request: {"head":{"version":"v2","channelId":null,"requestTimestamp":"1647109185289","workFlow":null,"signature":"iO/uU/OFP6/vBjs0F18J5tN24hel/HwZiPBKuTUMn4OJdXwjH3exHwXX43/HNLo9MrjgzAX1080WgNuPdHmZeX72vHBJJ/sZqc2f3tjoNXE="},"body":{"mid":"ciXcUt86833610141591","orderId":"QEMS14B3T"}}
+[2022-03-12T18:19:45.291Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: executeCurl called 
+[2022-03-12T18:19:45.291Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: will make API call to: https://securegw-stage.paytm.in/merchant-status/api/v1/getPaymentStatus
+[2022-03-12T18:19:45.490Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: API response received upon successful execution: {"head":{"responseTimestamp":"1647109185567","version":"v1","signature":"DWGvdgngUcE18hWdTAQ60d9Dj9s7NOgq1TXrG60l22z00pofwxGPcLj+kRRKclq6oL+m61SwMIEBS3YWuD4UWYeHMCQPUUVAk5FcGb5LhCI="},"body":{"resultInfo":{"resultStatus":"TXN_FAILURE","resultCode":"810","resultMsg":"Payment failed due to a technical error. Please try after some time."},"txnId":"20220312111212800110168842203509629","orderId":"QEMS14B3T","txnAmount":"10.00","txnType":"SALE","mid":"ciXcUt86833610141591","refundAmt":"0.0","txnDate":"2022-03-12 23:49:36.0"}}
+[2022-03-12T18:19:45.490Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: Raw Response: {"head":{"responseTimestamp":"1647109185567","version":"v1","signature":"DWGvdgngUcE18hWdTAQ60d9Dj9s7NOgq1TXrG60l22z00pofwxGPcLj+kRRKclq6oL+m61SwMIEBS3YWuD4UWYeHMCQPUUVAk5FcGb5LhCI="},"body":{"resultInfo":{"resultStatus":"TXN_FAILURE","resultCode":"810","resultMsg":"Payment failed due to a technical error. Please try after some time."},"txnId":"20220312111212800110168842203509629","orderId":"QEMS14B3T","txnAmount":"10.00","txnType":"SALE","mid":"ciXcUt86833610141591","refundAmt":"0.0","txnDate":"2022-03-12 23:49:36.0"}}
+[2022-03-12T18:19:45.491Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: Response Data Object: {"head":{"signature":"DWGvdgngUcE18hWdTAQ60d9Dj9s7NOgq1TXrG60l22z00pofwxGPcLj+kRRKclq6oL+m61SwMIEBS3YWuD4UWYeHMCQPUUVAk5FcGb5LhCI=","responseTimestamp":"1647109185567","version":"v1"},"body":{"txnId":"20220312111212800110168842203509629","orderId":"QEMS14B3T","txnAmount":"10.00","txnType":"SALE","mid":"ciXcUt86833610141591","refundAmt":"0.0","txnDate":"2022-03-12 23:49:36.0","resultInfo":{"resultStatus":"TXN_FAILURE","resultMsg":"Payment failed due to a technical error. Please try after some time.","resultCode":"810"},"extraParamsMap":{}}}
+[2022-03-12T18:19:45.491Z] [PAYTM] INFO [NODE-SDK:1.0.0:fc2aaa65-4bd9-40cd-92a2-372c7e46a0fa] <Request>: Execution completed with raw json response: {"head":{"responseTimestamp":"1647109185567","version":"v1","signature":"DWGvdgngUcE18hWdTAQ60d9Dj9s7NOgq1TXrG60l22z00pofwxGPcLj+kRRKclq6oL+m61SwMIEBS3YWuD4UWYeHMCQPUUVAk5FcGb5LhCI="},"body":{"resultInfo":{"resultStatus":"TXN_FAILURE","resultCode":"810","resultMsg":"Payment failed due to a technical error. Please try after some time."},"txnId":"20220312111212800110168842203509629","orderId":"QEMS14B3T","txnAmount":"10.00","txnType":"SALE","mid":"ciXcUt86833610141591","refundAmt":"0.0","txnDate":"2022-03-12 23:49:36.0"}}
+[2022-03-12T18:20:16.187Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:20:16.189Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:21:16.094Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:21:16.095Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:21:19.176Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:21:19.177Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:23:18.936Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:23:18.937Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:24:42.242Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:24:42.243Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:26:11.839Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:26:11.840Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:26:37.827Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:26:37.828Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:26:53.043Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:26:53.045Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:27:05.643Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:27:05.645Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:29:43.982Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:29:43.983Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:33:23.504Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:33:23.504Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:34:20.553Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:34:20.554Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:34:40.628Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:34:40.629Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
+[2022-03-12T18:35:52.676Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: initialize called
+[2022-03-12T18:35:52.678Z] [PAYTM] INFO [NODE-SDK1.0.0] <MerchantProperties>: Setting Environment for STAGE
