@@ -68,6 +68,17 @@ function generateRandomString(count) {
 }
 app.post("/api/pay", async (req, res) => {
   try {
+    if (
+      req.body.email == "" ||
+      req.body.firstName == "" ||
+      req.body.lastName == "" ||
+      req.body.phone == ""
+    ) {
+      return res.json({
+        validation: false,
+        message: "Please fill all the details",
+      });
+    }
     var channelId = Paytm.EChannelId.WEB;
     var orderId = generateRandomString(10);
     var txnAmount = Paytm.Money.constructWithCurrencyAndValue(
