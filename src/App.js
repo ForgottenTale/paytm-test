@@ -1,7 +1,7 @@
 
 import './App.css';
 import Payments from './components/payments';
-import { Routes, Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Confirmation from './components/confirmation';
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       < Router >
         <Routes>
           <Route path="/" element={<Payments />} exact />
-          <Route path="/confirmation" element={<Confirmation />} exact />
+          <Route path="/confirmation/:id" element={<Confirmation />} exact />
 
         </Routes>
 

@@ -7,20 +7,23 @@ const cors = require("cors");
 require("dotenv").config();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require("mongodb").ObjectID;
+const dotenv = require("dotenv");
 const app = express();
 const PORT = 5000;
+
+dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
 app.options("*", cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/static", express.static(path.join(__dirname, "./build//static")));
-app.get("*", function (req, res) {
+app.get("/", function (req, res) {
   res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
 });
-const dotenv = require("dotenv");
-dotenv.config();
+// app.use(express.static(path.join(__dirname,'build')));
+// app.use(express.static(__dirname + '/public'));
 
-const url =process.env.DBNAME;
+const url = process.env.DBNAME;
 const db = "paytm";
 
 async function getDBObject() {
@@ -67,7 +70,7 @@ function generateRandomString(count) {
   }
   return rand;
 }
-app.post("/pay", async (req, res) => {
+app.post("/api/pay", async (req, res) => {
   try {
     var channelId = Paytm.EChannelId.WEB;
     var orderId = generateRandomString(10);
@@ -91,7 +94,7 @@ app.post("/pay", async (req, res) => {
     var paymentDetail = paymentDetailBuilder.build();
     var response = await Paytm.Payment.createTxnToken(paymentDetail);
 
-    let amount="10.00";
+    let amount = "10.00";
     var details = {
       mid: process.env.Merchant_Id,
       orderId,
@@ -117,9 +120,9 @@ app.post("/pay", async (req, res) => {
   }
 });
 
-app.post("/callback", async (req, res) => {
+app.post("/api/callback", async (req, res) => {
   try {
-      console.log(req.body);
+    console.log(req.body);
     var orderId = req.body.ORDERID;
     var readTimeout = 80000;
     var paymentStatusDetailBuilder = new Paytm.PaymentStatusDetailBuilder(
@@ -129,18 +132,20 @@ app.post("/callback", async (req, res) => {
       .setReadTimeout(readTimeout)
       .build();
     var response = await Paytm.Payment.getPaymentStatus(paymentStatusDetail);
-console.log(response);
+    console.log(response);
     if (
       response.responseObject.body.resultInfo.resultStatus === "TXN_SUCCESS"
     ) {
       res.status(200);
       let dbObj = await getDBObject();
-      await dbObj.db.collection(db).updateOne({"orderId": orderId}, {$set: {
-        "status": "success",
-        "bankid": response.responseObject.body.bankTxnId,
-        "txnDate": response.responseObject.body.txnDate,
-        "txnId": response.responseObject.body.txnId,
-      }}, { "upsert": true });
+      await dbObj.db.collection(db).updateOne({ "orderId": orderId }, {
+        $set: {
+          "status": "success",
+          "bankid": response.responseObject.body.bankTxnId,
+          "txnDate": response.responseObject.body.txnDate,
+          "txnId": response.responseObject.body.txnId,
+        }
+      }, { "upsert": true });
       dbObj.conn.close();
       // const params = new URLSearchParams("/confirmation")
       // params.append("orderId", orderId);
@@ -148,31 +153,33 @@ console.log(response);
       // params.append("orderId", orderId);
       res.redirect("/confirmation/" + orderId);
       // res.send(response.responseObject.body)
-    }else{
-        let dbObj = await getDBObject();
-        await dbObj.db.collection(db).updateOne({"orderId": orderId}, {$set: {
-            "status": "failed",
-        }}, { "upsert": true });
-        dbObj.conn.close();
-        res.redirect("/confirmation/" + orderId);
+    } else {
+      let dbObj = await getDBObject();
+      await dbObj.db.collection(db).updateOne({ "orderId": orderId }, {
+        $set: {
+          "status": "failed",
+        }
+      }, { "upsert": true });
+      dbObj.conn.close();
+      res.redirect("/confirmation/" + orderId);
     }
   } catch (err) {
     console.log(err);
   }
 });
-app.get("/confirmation/:orderId", async (req, res) => {
+app.get("/api/status/:orderId", async (req, res) => {
   try {
-      const orderid=req.params.orderId;
+    const orderid = req.params.orderId;
     let dbObj = await getDBObject();
-    let obj = await dbObj.db.collection(db).findOne({"orderId": orderid});
+    let obj = await dbObj.db.collection(db).findOne({ "orderId": orderid });
     dbObj.conn.close();
     res.json({
-        "orderId": obj.orderId,
-        "txnId": obj.txnId,
-        "txnDate": obj.txnDate,
-        "amount": obj.amount,
+      "orderId": obj.orderId,
+      "txnId": obj.txnId,
+      "txnDate": obj.txnDate,
+      "amount": obj.amount,
     });
-  } catch {}
+  } catch { }
 });
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT}`)

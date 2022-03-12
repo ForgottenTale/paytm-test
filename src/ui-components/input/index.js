@@ -1,5 +1,6 @@
 
 import { getIn } from 'formik';
+import './styles.css'
 
 export default function Input({label,placeholder,value,setFieldValue,name,errors}) {
     return (
