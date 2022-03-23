@@ -331,7 +331,7 @@ app.post("/api/callback", async (req, res) => {
         txnId: response.responseObject.body.txnId,
       })
 
-      return res.redirect(`${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://forms.ieee-mint.org/"}/confirmation/jobfair/${req.body.ORDERID}`)
+      return res.redirect(`https://form.ieee-mint.org/confirmation/jobfair/${req.body.ORDERID}`)
       // res.status(201).send("done")
     }
     else {
@@ -341,7 +341,7 @@ app.post("/api/callback", async (req, res) => {
         txnDate: response.responseObject.body.txnDate,
         txnId: response.responseObject.body.txnId,
       })
-      return res.redirect(`${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://forms.ieee-mint.org/"}/confirmation/jobfair/${req.body.ORDERID}`)
+      return res.redirect(`https://form.ieee-mint.org/confirmation/jobfair/${req.body.ORDERID}`)
       // res.status(201).send("done")
 
     }
