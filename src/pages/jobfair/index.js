@@ -18,36 +18,36 @@ export default function JobFair() {
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState(false);
 
-    const user = {
-        email: "",
-        firstName: "",
-        lastName: "",
-        phone: undefined,
-        institute: "",
-        branch: "",
-        CGPA: "",
-        backlog: 0,
-        membershipId: undefined,
-        yearofPassout: undefined,
-        ieeeMember: undefined,
-        resume: undefined,
-        package: undefined
-    }
     // const user = {
-    //     email: "a@v.vom",
-    //     firstName: "A",
-    //     lastName: "BB",
-    //     phone: 123685,
-    //     institute: "CEK",
-    //     branch: "EEE",
-    //     CGPA: 1.25,
+    //     email: "",
+    //     firstName: "",
+    //     lastName: "",
+    //     phone: undefined,
+    //     institute: "",
+    //     branch: "",
+    //     CGPA: "",
     //     backlog: 0,
-    //     membershipId: 1299696,
-    //     yearofPassout: 2021,
-    //     ieeeMember: true,
+    //     membershipId: undefined,
+    //     yearofPassout: undefined,
+    //     ieeeMember: undefined,
     //     resume: undefined,
-    //     package: 250
+    //     package: undefined
     // }
+    const user = {
+        email: "abhijithkannan452@gmail.com",
+        firstName: "A",
+        lastName: "BB",
+        phone: 123685,
+        institute: "CEK",
+        branch: "EEE",
+        CGPA: 1.25,
+        backlog: 0,
+        membershipId: 1299696,
+        yearofPassout: 2021,
+        ieeeMember: true,
+        resume: undefined,
+        package: 250
+    }
 
     let schema = yup.object().shape({
         email: yup.string().email().required(),
