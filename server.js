@@ -395,7 +395,7 @@ const generateTxnId = async (req) => {
   try {
     var channelId = Paytm.EChannelId.WEB;
     var orderId = generateRandomString(10);
-    var txnAmount = Paytm.Money.constructWithCurrencyAndValue(Paytm.EnumCurrency.INR, "10.00");
+    var txnAmount = Paytm.Money.constructWithCurrencyAndValue(Paytm.EnumCurrency.INR, req.body.ieeeMember?"250.00":"500.00");
     var userInfo = new Paytm.UserInfo(generateRandomString(10));
     userInfo.setEmail(req.body.email);
     userInfo.setFirstName(req.body.firstName);
