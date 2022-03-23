@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./loader";
 import Error from "./error";
+import styles from '../styles/Confirmation.module.css'
 import { useParams } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 export default function Confirmation() {
-    const { id } = useParams();
+    const { id, type } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
@@ -14,7 +16,7 @@ export default function Confirmation() {
 
     useEffect(async () => {
         try {
-            const res = await axios.get(`/api/confirmation/${id}`);
+            const res = await axios.get(`/api/confirmation?id=${id}&type=${type}`);
             console.log(res.data)
             setLoading(false);
             setData(res.data)
@@ -28,6 +30,9 @@ export default function Confirmation() {
 
     return (
         <main className="main">
+            <Helmet>
+                <title>Confirmation</title>
+            </Helmet>
             <div className="eventform">
                 {error ? <Error setError={setError} msg={errorMsg} /> : null}
                 {loading ?
@@ -35,9 +40,9 @@ export default function Confirmation() {
                     <div className="eventform_con">
                         <div className="eventdetails">
                             <p className="eventdetails_dnt">Event Registration Confirmation</p>
-                            <h3 className="eventdetails_title">Introduction to CryptoCurrency</h3>
-                            {data.status !== undefined && data.status === "success" ? <p className="eventdetails_des">Thank you for registering for the event. A copy of the receipt has been sent to your registered email</p>:
-                             <p className="eventdetails_des red">{data.status !== "failed"?"The payment is yet to be recieved":"The transaction has failed"}</p>
+                            <h3 className="eventdetails_title">IEEE Job Fair 2022</h3>
+                            {data.paymentStatus !== undefined && data.paymentStatus === "success" ? <p className="eventdetails_des">Thank you for registering for the event. A copy of the receipt has been sent to your registered email</p> :
+                                <p className="eventdetails_des red">{data.paymentStatus !== "failed" ? "The payment is yet to be recieved" : "The transaction has failed"}</p>
                             }
                             {/* <p className="confirm"></p> */}
                         </div>
@@ -47,13 +52,13 @@ export default function Confirmation() {
                                 {data.orderId !== undefined ?
                                     <><p>Order Id</p> <p>{data.orderId}</p></> : null}
                                 {data.txnId !== undefined ?
-                                    <><p>Transaction Id</p> <p>{data.txnId}</p></> : null}
-                                {data.status !== undefined ?
-                                    <><p>Payment Status</p> <p className={data.status}>{data.status}</p></> : null}
+                                    <><p >Transaction Id</p> <p className={styles.txn}>{data.txnId}</p></> : null}
+                                {data.paymentStatus !== undefined ?
+                                    <><p>Payment Status</p> <p className={styles[data.paymentStatus]}>{data.paymentStatus}</p></> : null}
                                 {data.amount !== undefined ?
                                     <><p>Amount</p> <p>{data.amount}</p></> : null}
                                 {data.txnDate !== undefined ?
-                                    <><p>Date</p> <p>{data.txnDate}</p></> : null}
+                                    <><p>Date</p> <p>{new Date(data.txnDate).toLocaleDateString()} {new Date(data.txnDate).toLocaleTimeString()}</p></> : null}
 
 
 
@@ -69,6 +74,11 @@ export default function Confirmation() {
 
                             </div>
 
+                        </div>
+
+                        <div className={styles.buttons}>
+                            <button className={styles.button} onClick={()=>window.print()}>Print</button>
+                            <button className={styles.button}>Submit another</button>
                         </div>
                     </div>
                 }
