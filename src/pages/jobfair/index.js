@@ -10,43 +10,96 @@ import Select from '../../ui-components/select';
 import DragandDrop from '../../ui-components/draganddrop';
 import Radio from '../../ui-components/radio';
 import Helmet from 'react-helmet';
+import loadScript from '../../utils/razorpayScript';
+import { useNavigate } from 'react-router-dom';
+import buildForm from '../../utils/buildForm';
 
 export default function JobFair() {
 
-
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState(false);
 
     // const user = {
-    //     email: "",
-    //     firstName: "",
-    //     lastName: "",
-    //     phone: undefined,
-    //     institute: "",
-    //     branch: "",
-    //     CGPA: "",
+    //     email: "abhijithkannan452@gmail.com",
+    //     firstName: "A",
+    //     lastName: "BB",
+    //     phone: 1236851234,
+    //     institute: "CEK",
+    //     branch: "EEE",
+    //     CGPA: 1.25,
     //     backlog: 0,
-    //     membershipId: undefined,
-    //     yearofPassout: undefined,
-    //     ieeeMember: undefined,
+    //     membershipId: 1299696,
+    //     yearofPassout: 2021,
+    //     ieeeMember: true,
     //     resume: undefined,
-    //     package: undefined
+    //     package: 250
     // }
+
     const user = {
-        email: "abhijithkannan452@gmail.com",
-        firstName: "A",
-        lastName: "BB",
-        phone: 123685,
-        institute: "CEK",
-        branch: "EEE",
-        CGPA: 1.25,
+        email: "",
+        firstName: "",
+        lastName: "",
+        phone: undefined,
+        institute: "",
+        branch: "",
+        CGPA: "",
         backlog: 0,
-        membershipId: 1299696,
-        yearofPassout: 2021,
-        ieeeMember: true,
+        membershipId: undefined,
+        yearofPassout: undefined,
+        ieeeMember: undefined,
         resume: undefined,
-        package: 250
+        package: undefined
+    }
+
+    async function displayRazorpay(data, values) {
+        const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+        if (!res) {
+            alert('Razorpay SDK failed to load. Are you online?')
+            return
+        }
+
+        const options = {
+            key: data.key,
+            currency: data.currency,
+            amount: String(data.amount),
+            order_id: data.id,
+            name: 'IEEE Job Fair 2022',
+            description: 'Thank you for registering',
+
+            handler: async (response) => {
+                try {
+                    await axios.post("/api/pay/razorpay/verify", response)
+                    navigate(`/confirmation/jobfair/${response.razorpay_order_id}`)
+                } catch (err) {
+                    setError(true)
+                    setErrorMsg(err.response !== undefined ? err.response.data.error : err)
+                    setLoading(false);
+                }
+
+            },
+            prefill: {
+                name: `${values.firstName} ${values.lastName}`,
+                email: values.email,
+                contact: `+91${values.phone}`
+            }
+        }
+        const paymentObject = new window.Razorpay(options)
+        paymentObject.open()
+        paymentObject.on('payment.failed', async (response) => {
+            console.log(response)
+            try {
+                await axios.post("/api/pay/razorpay/failed", response.error)
+                navigate(`/confirmation/jobfair/${response.error.metadata.order_id}`)
+                paymentObject.close()
+            } catch (err) {
+                setError(true)
+                setErrorMsg(err.response !== undefined ? err.response.data.error : err)
+                setLoading(false);
+            }
+        });
     }
 
     let schema = yup.object().shape({
@@ -64,58 +117,14 @@ export default function JobFair() {
         resume: yup.mixed().required(),
         package: yup.number().required()
     });
-    function isDate(val) {
-        // Cross realm comptatible
-        return Object.prototype.toString.call(val) === '[object Date]'
-    }
 
-    function isObj(val) {
-        return typeof val === 'object'
-    }
 
-    function stringifyValue(val) {
-        if (isObj(val) && !isDate(val)) {
-            return JSON.stringify(val)
-        } else {
-            return val
-        }
-    }
-
-    function buildForm({ action, params }) {
-        const form = document.createElement('form')
-        form.setAttribute('method', 'post')
-        form.setAttribute('action', action)
-
-        Object.keys(params).forEach(key => {
-            const input = document.createElement('input')
-            input.setAttribute('type', 'hidden')
-            input.setAttribute('name', key)
-            input.setAttribute('value', stringifyValue(params[key]))
-            form.appendChild(input)
-        })
-
-        return form
-    }
-
-    function post(details) {
-        const form = buildForm(details)
-        document.body.appendChild(form)
-        form.submit()
-        form.remove()
-    }
     const handleUpload = async (values) => {
         setLoading(true);
         try {
 
-            var formData = new FormData()
-            var key = Object.keys(values)
-            console.log(values["email"])
-            console.log(key)
-            key.forEach((val) => {
-                formData.append(val, values[val])
-            })
-            console.log(formData)
-            const res = await axios.post("/api/jobfair/pay", formData,
+            const formData = buildForm(values)
+            const res = await axios.post("/api/pay/razorpay", formData,
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
@@ -123,15 +132,17 @@ export default function JobFair() {
 
                 }
             )
-            var details = {
-                action: "https://securegw-stage.paytm.in/order/process",
-                params: res.data
-            }
+            // await axios.post("https://securegw-stage.paytm.in/order/process",formData)
+            // var details = {
+            //     action: "https://securegw-stage.paytm.in/order/process",
+            //     params: res.data
+            // }
 
-            post(details);
+            // post(details);
+
+            displayRazorpay(res.data, values)
         }
         catch (err) {
-            // console.log(err.response.data);
             setError(true)
             setErrorMsg(err.response !== undefined ? err.response.data.error : err)
             setLoading(false);
@@ -150,15 +161,13 @@ export default function JobFair() {
 
     ]
     return (
-
-
         <div className={styles.container}>
             <Helmet>
                 <title>IEEE Job Fair 2022</title>
             </Helmet>
             <main className={styles.main}>
                 <div className={styles.eventdetails_con} >
-                    <img src="./banner.jpeg" className={styles.image} />
+                    <img src="./banner.jpeg" className={styles.image} alt="BANNER" />
 
                     <div className={styles.eventdetails} >
 

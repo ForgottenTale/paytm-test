@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { number, boolean } = require('yup');
 const Schema = mongoose.Schema;
 
 const applicantSchema = new Schema({
