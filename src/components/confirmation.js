@@ -14,19 +14,22 @@ export default function Confirmation() {
     const [data, setData] = useState({
     })
 
-    useEffect(async () => {
-        try {
-            const res = await axios.get(`/api/confirmation?id=${id}&type=${type}`);
-            console.log(res.data)
-            setLoading(false);
-            setData(res.data)
+    useEffect(()=>{
+        async function getData() {
+            try {
+                const res = await axios.get(`/api/pay/confirmation?id=${id}&type=${type}`);
+                console.log(res.data)
+                setLoading(false);
+                setData(res.data)
+            }
+            catch (err) {
+                setError(true)
+                setErrorMsg(err.response !== undefined ? String(err) : String(err))
+                // setLoading(false);
+            }
         }
-        catch (err) {
-            setError(true)
-            setErrorMsg(err.response !== undefined ? String(err) : String(err))
-            // setLoading(false);
-        }
-    }, [id])
+        getData()
+    }, [id,type])
 
     return (
         <main className="main">
