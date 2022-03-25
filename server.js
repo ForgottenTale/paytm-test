@@ -8,6 +8,7 @@ const logger = require("./server/utils/logger");
 const { connectToPaytm } = require('./server/modules/paytm');
 
 const payRoute = require('./server/routes/pay');
+const formRoute  =require('./server/routes/form')
 const app = express();
 const port = process.env.PORT || 5000
 
@@ -25,6 +26,8 @@ app.get("/api/test", (req, res) => {
 })
 
 app.use("/api/pay", payRoute);
+app.use("/api/form", formRoute);
+
 
 
 app.get("/", function (req, res) {

@@ -1,0 +1,32 @@
+
+.search{
+    
+
+    
+    &_input {
+        width: 100%;
+        padding: 10px;
+        padding-left: 50px;
+        height: 45px;
+        background-color: #eff2f5;
+        border: none;
+        border-radius: 10px;
+        outline-color: #1479ff;
+    }
+    
+    &_container {
+        margin-bottom: 20px;
+        position: relative;
+        width: 100%;
+
+    }
+    &_icon{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        stroke: #757575;
+
+    }
+}
+

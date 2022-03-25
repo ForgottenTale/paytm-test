@@ -4,17 +4,17 @@ import Loader from "./loader";
 import Error from "./error";
 import styles from '../styles/Confirmation.module.css'
 import { useParams } from 'react-router-dom';
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 export default function Confirmation() {
-    const { id, type } = useParams();
+    const { orderId: id, formId: type } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [data, setData] = useState({
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         async function getData() {
             try {
                 const res = await axios.get(`/api/pay/confirmation?id=${id}&type=${type}`);
@@ -29,7 +29,7 @@ export default function Confirmation() {
             }
         }
         getData()
-    }, [id,type])
+    }, [id, type])
 
     return (
         <main className="main">
@@ -80,7 +80,7 @@ export default function Confirmation() {
                         </div>
 
                         <div className={styles.buttons}>
-                            <button className={styles.button} onClick={()=>window.print()}>Print</button>
+                            <button className={styles.button} onClick={() => window.print()}>Print</button>
                             <button className={styles.button}>Submit another</button>
                         </div>
                     </div>

@@ -1,0 +1,19 @@
+.mail {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_con {
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 80%;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    }
+}
