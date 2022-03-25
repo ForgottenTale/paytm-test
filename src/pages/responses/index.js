@@ -42,6 +42,24 @@ export default function Responses() {
         getData()
     }, [formId])
 
+    const createCsv = () => {
+        const headers = ["OrderId", "Name", "Email", "Phone", "Institute", "Backlog", "Branch", "CGPA", "Passout Year", "Payment Status", "Resume"];
+        const rows = [headers];
+
+        data.forEach((val)=>{
+            rows.push([
+                val.orderId,val.firstName + " " + val.lastName,val.email,val.phone,val.institute,val.backlog,val.branch,val.CGPA,val.yearofPassout,val.paymentStatus,`https://forms.ieee-mint.org/${val.resume}`
+            ])
+        })
+
+        let csvContent = "data:text/csv;charset=utf-8,"
+            + rows.map(e => e.join(",")).join("\n");
+
+
+        var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
+    }
+
 
     return (
         <div className="responses">
@@ -57,7 +75,7 @@ export default function Responses() {
                             <Input onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for users, email address..." />
                             <div className="responses_buttons">
                                 <div className="responses_button" onClick={() => setShowMail(true)}><SendIcon /><p>Send mail</p></div>
-                                <div className="responses_button"><DownloadIcon /><p>Download CSV</p></div>
+                                <div className="responses_button" onClick={() => createCsv()}><DownloadIcon /><p>Download CSV</p></div>
                             </div>
 
                         </div>
@@ -68,7 +86,10 @@ export default function Responses() {
                                 </div>)}
                             </div>
                             {data.filter((n) => {
-                                if (`${n.firstName + " " + n.lastName}`.includes(searchTerm) || n.email.includes(searchTerm) || n.paymentStatus.includes(searchTerm) || n.orderId.includes(searchTerm)) {
+                                if (`${n.firstName + " " + n.lastName}`.toLowerCase().includes(searchTerm.toLowerCase())
+                                    || n.email.toLowerCase().includes(searchTerm.toLowerCase())
+                                    || n.paymentStatus.toLowerCase().includes(searchTerm.toLowerCase())
+                                    || n.orderId.includes(searchTerm.toLowerCase())) {
                                     return n;
                                 } else {
                                     return null;
