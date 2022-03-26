@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'mint-forms'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A720799C36394ED28F4D5CC0E4CD0A5F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DF0651FE7D9C4D71AD4622173B2F7BA5 }}
           package: .
