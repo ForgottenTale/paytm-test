@@ -13,7 +13,7 @@
 /.env
 # production
 
-
+.credentails
 # misc
 
 
