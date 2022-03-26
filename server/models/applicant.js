@@ -9,6 +9,7 @@ const applicantSchema = new Schema({
     institute: { type: String, required: true },
     branch: { type: String, required: true },
     yearofPassout: { type: String, required: true },
+    phone: { type: Number, required: true },
     CGPA: { type: String, required: true },
     backlog: { type: Number },
     ieeeMember: { type: Boolean, required: true },
@@ -16,7 +17,6 @@ const applicantSchema = new Schema({
     orderId: { type: String, required: true },
     amount: { type: String, required: true },
     paymentStatus: { type: String, required: true },
-    bankId: { type: String, required: true },
     txnDate: { type: String, required: true },
     txnId: { type: String, required: true }
 

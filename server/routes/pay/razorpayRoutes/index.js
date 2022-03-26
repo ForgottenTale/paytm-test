@@ -40,7 +40,6 @@ router.post("/verify", async (req, res) => {
 
         const applicant = await Applicant.findOneAndUpdate({ orderId: req.body.razorpay_order_id }, {
             paymentStatus: "success",
-            bankId: "nil",
             txnDate: moment.unix(orderDetails.created_at).toISOString(),
             txnId: req.body.razorpay_payment_id,
         });
@@ -50,7 +49,7 @@ router.post("/verify", async (req, res) => {
             txnDate: moment.unix(orderDetails.created_at).toISOString(),
             txnId: req.body.razorpay_payment_id,
         }
-        notify(true, data, applicant.email);
+        notify(true, data, applicant);
         applicant.save().then(() => res.sendStatus(200)).catch((err) => {
             logger.error(err)
             res.status(400).send({ error: err.message })
@@ -73,11 +72,10 @@ router.post("/failed", async (req, res) => {
     }
     const applicant = await Applicant.findOneAndUpdate({ orderId: req.body.metadata.order_id }, {
         paymentStatus: "failed",
-        bankId: "failed",
         txnDate: moment.unix(orderDetails.created_at).toISOString(),
         txnId: "failed",
     })
-    notify(false, data, applicant.email);
+    notify(false, data, applicant);
 
     applicant.save()
         .then(() => res.sendStatus(200))
@@ -105,6 +103,7 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 lastName: req.body.lastName,
                 email: req.body.email,
                 institute: req.body.institute,
+                phone:req.body.phone,
                 branch: req.body.branch,
                 yearofPassout: req.body.yearofPassout,
                 CGPA: req.body.CGPA,
@@ -114,7 +113,6 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 orderId: order.id,
                 amount: order.amount / 100,
                 paymentStatus: "Pending",
-                bankId: "Pending",
                 txnDate: "Pending",
                 txnId: "Pending"
             })

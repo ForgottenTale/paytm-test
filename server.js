@@ -6,11 +6,14 @@ const mongoose = require('mongoose')
 const cors = require("cors");
 const logger = require("./server/utils/logger");
 const { connectToPaytm } = require('./server/modules/paytm');
+const fs = require('fs')
 
 const payRoute = require('./server/routes/pay');
-const formRoute  =require('./server/routes/form')
+const formRoute = require('./server/routes/form')
 const app = express();
 const port = process.env.PORT || 5000
+
+
 
 app.use(cors());
 app.options("*", cors());
@@ -30,9 +33,16 @@ app.use("/api/form", formRoute);
 
 
 
-app.get("/", function (req, res) {
-  res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
+app.get("/about", function (req, res) {
+
+    res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
+  
 });
+
+app.route('/files/*')
+  .get((req, res) => {
+    res.sendFile(process.cwd() + decodeURI(req.url));
+  })
 
 app.get('*', (req, res) => {
   res.sendFile(process.cwd() + '/build/index.html');

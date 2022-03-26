@@ -5,8 +5,10 @@ import Error from "./error";
 import styles from '../styles/Confirmation.module.css'
 import { useParams } from 'react-router-dom';
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 export default function Confirmation() {
+    const navigate = useNavigate()
     const { orderId: id, formId: type } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -81,7 +83,7 @@ export default function Confirmation() {
 
                         <div className={styles.buttons}>
                             <button className={styles.button} onClick={() => window.print()}>Print</button>
-                            <button className={styles.button}>Submit another</button>
+                            <button className={styles.button} onClick={()=>navigate(`/${type}`)}>Submit another</button>
                         </div>
                     </div>
                 }

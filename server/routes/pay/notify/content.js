@@ -1,14 +1,16 @@
-const msg = require('../../../mail/registerSuccess');
+const success = require('../../../mailTemplates/registerSuccess');
+const failed = require('../../../mailTemplates/registerFailed');
 
-function content(status,data,email) {
+function content(status, data, applicant) {
 
     const content = status ? {
         from: process.env.NODE_ENV === "production" ? process.env.MAIL_USER : "graciela.keeling37@ethereal.email",
-        to: process.env.NODE_ENV === "production" ? email : "graciela.keeling37@ethereal.email",
+        to: process.env.NODE_ENV === "production" ? applicant.email : "graciela.keeling37@ethereal.email",
         subject: "IEEE Job Fair 2022 | Registration Successful",
-        html: msg(
+        html: success(
             {
-                orderId:data.orderId,
+                name: applicant.firstName + " " + applicant.lastName,
+                orderId: data.orderId,
                 amount: data.txnAmount,
                 paymentStatus: "success",
                 txnDate: data.txnDate,
@@ -18,11 +20,12 @@ function content(status,data,email) {
 
     } : {
         from: process.env.NODE_ENV === "production" ? process.env.MAIL_USER : "graciela.keeling37@ethereal.email",
-        to: process.env.NODE_ENV === "production" ? email : "graciela.keeling37@ethereal.email",
+        to: process.env.NODE_ENV === "production" ? applicant.email : "graciela.keeling37@ethereal.email",
         subject: "IEEE Job Fair 2022 | Registration failed",
-        html: msg(
+        html: failed(
             {
-                orderId:data.orderId,
+                name: applicant.firstName + " " + applicant.lastName,
+                orderId: data.orderId,
                 amount: data.txnAmount,
                 paymentStatus: "failed",
                 txnDate: data.txnDate
