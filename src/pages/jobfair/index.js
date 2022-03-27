@@ -31,9 +31,9 @@ export default function JobFair() {
     //     branch: "EEE",
     //     CGPA: 1.25,
     //     backlog: 0,
-    //     membershipId: 1299696,
+    //     membershipId: undefined,
     //     yearofPassout: 2021,
-    //     ieeeMember: true,
+    //     ieeeMember:false,
     //     resume: undefined,
     //     package: 250,
     //     courseType: undefined
@@ -114,9 +114,16 @@ export default function JobFair() {
         branch: yup.string().required(),
         CGPA: yup.number().required(),
         backlog: yup.number(),
-        membershipId: yup.number(),
         yearofPassout: yup.number().required(),
         ieeeMember: yup.boolean().required(),
+        membershipId: yup.number().when('ieeeMember', (ieeeMember) => {
+            if (ieeeMember) {
+                return yup.number().required();
+            }
+            else{
+                return yup.number()
+            }
+        }),
         resume: yup.mixed().required(),
         package: yup.number().required(),
         courseType: yup.string().required()
@@ -125,6 +132,11 @@ export default function JobFair() {
 
     const handleUpload = async (values) => {
         setLoading(true);
+
+        // if ((values.ieeeMember && values === undefined) || (values.ieeeMember && values === "")) {
+        //     setIeeeMemberErr(true)
+        // }
+        // else{
         try {
 
             const formData = buildForm(values)
@@ -151,6 +163,8 @@ export default function JobFair() {
             setErrorMsg(err.response !== undefined ? err.response.data.error : err)
             setLoading(false);
         }
+        // }
+
 
     }
 
@@ -166,7 +180,7 @@ export default function JobFair() {
     ]
     const ct = [
         { value: 'Mtech', label: 'Mtech' },
-        { value:'Btech', label: 'Btech' },
+        { value: 'Btech', label: 'Btech' },
 
     ]
     return (
@@ -243,7 +257,7 @@ export default function JobFair() {
                                             setFieldValue={setFieldValue}
                                             errors={errors}></Input>
                                         <Input label="CGPA *"
-                                            placeholder={"Total CGPA till 6th Semester"}
+                                            placeholder={"Total CGPA till now"}
                                             value={values}
                                             name="CGPA"
                                             setFieldValue={setFieldValue}

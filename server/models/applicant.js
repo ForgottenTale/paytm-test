@@ -19,7 +19,8 @@ const applicantSchema = new Schema({
     amount: { type: String, required: true },
     paymentStatus: { type: String, required: true },
     txnDate: { type: String, required: true },
-    txnId: { type: String, required: true }
+    txnId: { type: String, required: true },
+    membershipId:{type:Number}
 
 
 }, { timestamps: true })

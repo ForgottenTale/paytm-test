@@ -88,7 +88,7 @@ router.post("/failed", async (req, res) => {
 
 router.post("/", upload.single("resume"), async (req, res) => {
     try {
-
+        console.log(req.body.ieeeMember)
         var options = {
             amount: req.body.ieeeMember === "true" ? 25000 : 50000,
             currency: "INR",
@@ -103,11 +103,12 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 lastName: req.body.lastName,
                 email: req.body.email,
                 institute: req.body.institute,
-                phone:req.body.phone,
+                phone: req.body.phone,
                 branch: req.body.branch,
                 yearofPassout: req.body.yearofPassout,
                 CGPA: req.body.CGPA,
                 backlog: req.body.backlog,
+                membershipId: req.body.membershipId !== undefined &&  req.body.membershipId !== "undefined"? req.body.membershipId : 0,
                 ieeeMember: req.body.ieeeMember,
                 resume: req.file.path,
                 orderId: order.id,
@@ -115,7 +116,7 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 paymentStatus: "Pending",
                 txnDate: "Pending",
                 txnId: "Pending",
-                courseType:req.body.courseType
+                courseType: req.body.courseType
             })
             logger.info(`> Razor token created for ${req.body.firstName + " " + req.body.lastName}`)
             applicant.save()
