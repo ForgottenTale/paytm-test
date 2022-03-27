@@ -72,8 +72,8 @@ export default function Confirmation() {
                         <div className="paymentDetails">
                             <p className="paymentDetails_title">Event Details</p>
                             <div className="paymentDetails_grid">
-                                <p>Date and Time</p> <p>12th Mar 2022 11:00 PM IST</p>
-                                <p>Venue</p> <p>Kottayam, Kerala</p>
+                                <p>Date and Time</p> <p>April 2022</p>
+                                <p>Venue</p> <p>Online</p>
                                 {/* <p>Amount</p> <p>Rs 10.00</p>
                             <p>Date</p> <p>12th Mar 2022 11:00 PM IST</p> */}
 

@@ -14,7 +14,10 @@ function content(status, data, applicant) {
                 amount: data.txnAmount,
                 paymentStatus: "success",
                 txnDate: data.txnDate,
-                txnId: data.txnId
+                txnId: data.txnId,
+                email:applicant.email,
+                phone:applicant.phone
+
             }
         )
 
@@ -28,7 +31,9 @@ function content(status, data, applicant) {
                 orderId: data.orderId,
                 amount: data.txnAmount,
                 paymentStatus: "failed",
-                txnDate: data.txnDate
+                txnDate: data.txnDate,
+                email:applicant.email,
+                phone:applicant.phone
             }
         )
     }

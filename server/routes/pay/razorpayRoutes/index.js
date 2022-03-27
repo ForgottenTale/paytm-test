@@ -114,7 +114,8 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 amount: order.amount / 100,
                 paymentStatus: "Pending",
                 txnDate: "Pending",
-                txnId: "Pending"
+                txnId: "Pending",
+                courseType:req.body.courseType
             })
             logger.info(`> Razor token created for ${req.body.firstName + " " + req.body.lastName}`)
             applicant.save()

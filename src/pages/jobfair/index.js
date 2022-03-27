@@ -10,6 +10,7 @@ import Select from '../../ui-components/select';
 import DragandDrop from '../../ui-components/draganddrop';
 import Radio from '../../ui-components/radio';
 import Helmet from 'react-helmet';
+import src from '../../assets/banner.jpeg'
 import loadScript from '../../utils/razorpayScript';
 import { useNavigate } from 'react-router-dom';
 import buildForm from '../../utils/buildForm';
@@ -34,7 +35,8 @@ export default function JobFair() {
     //     yearofPassout: 2021,
     //     ieeeMember: true,
     //     resume: undefined,
-    //     package: 250
+    //     package: 250,
+    //     courseType: undefined
     // }
 
     const user = {
@@ -50,7 +52,8 @@ export default function JobFair() {
         yearofPassout: undefined,
         ieeeMember: undefined,
         resume: undefined,
-        package: undefined
+        package: undefined,
+        courseType: undefined
     }
 
     async function displayRazorpay(data, values) {
@@ -115,7 +118,8 @@ export default function JobFair() {
         yearofPassout: yup.number().required(),
         ieeeMember: yup.boolean().required(),
         resume: yup.mixed().required(),
-        package: yup.number().required()
+        package: yup.number().required(),
+        courseType: yup.string().required()
     });
 
 
@@ -160,6 +164,11 @@ export default function JobFair() {
         { value: false, label: 'No' },
 
     ]
+    const ct = [
+        { value: 'Mtech', label: 'Mtech' },
+        { value:'Btech', label: 'Btech' },
+
+    ]
     return (
         <div className={styles.container}>
             <Helmet>
@@ -167,7 +176,7 @@ export default function JobFair() {
             </Helmet>
             <main className={styles.main}>
                 <div className={styles.eventdetails_con} >
-                    <img src="./banner.jpeg" className={styles.image} alt="BANNER" />
+                    <img src={src} className={styles.image} alt="BANNER" />
 
                     <div className={styles.eventdetails} >
 
@@ -239,6 +248,13 @@ export default function JobFair() {
                                             name="CGPA"
                                             setFieldValue={setFieldValue}
                                             errors={errors}></Input>
+                                        <Select
+                                            label="Course type *"
+                                            options={ct}
+                                            name="courseType"
+                                            value={[{ value: values["courseType"], label: values["courseType"] }]}
+                                            setFieldValue={setFieldValue}
+                                            errors={errors} />
                                         <Select
                                             label="Year of passout *"
                                             options={yop}

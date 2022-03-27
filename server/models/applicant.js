@@ -11,6 +11,7 @@ const applicantSchema = new Schema({
     yearofPassout: { type: String, required: true },
     phone: { type: Number, required: true },
     CGPA: { type: String, required: true },
+    courseType: { type: String, required: true },
     backlog: { type: Number },
     ieeeMember: { type: Boolean, required: true },
     resume: { type: String, required: true },
