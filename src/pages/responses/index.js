@@ -43,12 +43,12 @@ export default function Responses() {
     }, [formId])
 
     const createCsv = () => {
-        const headers = ["OrderId", "Name", "Email", "Phone", "Institute", "Backlog", "Branch", "CGPA", "Passout Year", "Payment Status", "Resume"];
+        const headers = ["OrderId", "Name", "Email", "Phone", "Institute", "Backlog", "Branch", "CGPA", "Year of graduation","IEEE Member","Membership Id","Amount", "Payment Status", "Resume"];
         const rows = [headers];
 
-        data.forEach((val)=>{
+        data.forEach((val) => {
             rows.push([
-                val.orderId,val.firstName + " " + val.lastName,val.email,val.phone,val.institute,val.backlog,val.branch,val.CGPA,val.yearofPassout,val.paymentStatus,`https://forms.ieee-mint.org/${val.resume}`
+                val.orderId, val.firstName + " " + val.lastName, val.email, val.phone, String(val.institute), val.backlog, val.branch, val.CGPA, val.yearofPassout,val.ieeeMember?"Yes":"No",val.membershipId,val.amount, val.paymentStatus, `https://forms.ieee-mint.org/${val.resume}`
             ])
         })
 
@@ -58,6 +58,18 @@ export default function Responses() {
 
         var encodedUri = encodeURI(csvContent);
         window.open(encodedUri);
+    }
+    const sendNotification = async()=>{
+        try{
+            await axios.post("/api/form/mail/reminder")
+            setError(true)
+            setErrorMsg("Payment notification mail send")
+        }
+        catch(err){
+            setError(true)
+            setErrorMsg(err.response !== undefined ? err.response.data.error : err)
+        }
+
     }
 
 
@@ -74,6 +86,7 @@ export default function Responses() {
                         <div className="responses_tools">
                             <Input onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for users, email address..." />
                             <div className="responses_buttons">
+                                <div className="responses_button" onClick={() => sendNotification()}><SendIcon /><p>Send notification</p></div>
                                 <div className="responses_button" onClick={() => setShowMail(true)}><SendIcon /><p>Send mail</p></div>
                                 <div className="responses_button" onClick={() => createCsv()}><DownloadIcon /><p>Download CSV</p></div>
                             </div>

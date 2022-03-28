@@ -26,7 +26,7 @@ export default function Mail({ setShowMail }) {
         try {
             if (content.subject !== "" && content.subject !== ""&&!once) {
                 setOnce(true)
-                await axios.post("/api/form/sendmail?formId=jobfair", content)
+                await axios.post("/api/form/mail?to=success", content)
                 console.log(content)
                 setErrorMsg("Mail send")
                 setError(true)

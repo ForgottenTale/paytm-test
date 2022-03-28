@@ -26,9 +26,28 @@ const fileStorage = multer.diskStorage({
 
 const upload = multer({ storage: fileStorage })
 
+router.get("/orderDetails", async (req, res) => {
+    try {
+        const orderDetails = await instance.orders.fetch(req.query.orderId)
+        const applicant = await Applicant.findOne({ orderId: req.query.orderId })
+        logger.info(`> Reinitated payment for ${applicant.firstName + " " + applicant.lastName} orderId : ${req.query.orderId}`)
+        orderDetails.key = process.env.razorPayId
+        orderDetails.userDetails = {
+            name: applicant.firstName + " " + applicant.lastName,
+            email: applicant.email,
+            phone: applicant.phone
+        }
+        res.send(orderDetails)
+    }
+    catch (err) {
+        logger.error(err)
+        res.status(400).send({ error: err.message })
+    }
+
+})
 
 router.post("/verify", async (req, res) => {
-    logger.info("Request recieved")
+
     let body = req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
     var expectedSignature = crypto.createHmac('sha256', process.env.razorPaySecret)
         .update(body.toString())
@@ -49,7 +68,7 @@ router.post("/verify", async (req, res) => {
             txnDate: moment.unix(orderDetails.created_at).toISOString(),
             txnId: req.body.razorpay_payment_id,
         }
-        notify(true, data, applicant);
+        notify("success", data, applicant);
         applicant.save().then(() => res.sendStatus(200)).catch((err) => {
             logger.error(err)
             res.status(400).send({ error: err.message })
@@ -75,7 +94,7 @@ router.post("/failed", async (req, res) => {
         txnDate: moment.unix(orderDetails.created_at).toISOString(),
         txnId: "failed",
     })
-    notify(false, data, applicant);
+    notify("failed", data, applicant);
 
     applicant.save()
         .then(() => res.sendStatus(200))
@@ -88,7 +107,7 @@ router.post("/failed", async (req, res) => {
 
 router.post("/", upload.single("resume"), async (req, res) => {
     try {
-        console.log(req.body.ieeeMember)
+
         var options = {
             amount: req.body.ieeeMember === "true" ? 25000 : 50000,
             currency: "INR",
@@ -108,7 +127,7 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 yearofPassout: req.body.yearofPassout,
                 CGPA: req.body.CGPA,
                 backlog: req.body.backlog,
-                membershipId: req.body.membershipId !== undefined &&  req.body.membershipId !== "undefined"? req.body.membershipId : 0,
+                membershipId: req.body.membershipId !== undefined && req.body.membershipId !== "undefined" ? req.body.membershipId : 0,
                 ieeeMember: req.body.ieeeMember,
                 resume: req.file.path,
                 orderId: order.id,
@@ -119,6 +138,7 @@ router.post("/", upload.single("resume"), async (req, res) => {
                 courseType: req.body.courseType
             })
             logger.info(`> Razor token created for ${req.body.firstName + " " + req.body.lastName}`)
+            notify("pending", order, req.body);
             applicant.save()
                 .then(() => res.send(order))
                 .catch((err) => {

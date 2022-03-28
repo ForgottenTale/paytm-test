@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import JobFair from './pages/jobfair';
 import Responses from './pages/responses';
 import Confirmation from './components/confirmation';
+import CompletePayment from './pages/completePayment';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/:formId" element={<JobFair />} exact />
           <Route path="/:formId/responses" element={<Responses />} exact />
           <Route path="/confirmation/:formId/:orderId" element={<Confirmation />} exact />
+          <Route path="/completepayment/:id" element={<CompletePayment />} exact />
           <Route path="/" element={<Payments />} exact />
         </Routes>
 

@@ -22,39 +22,39 @@ export default function JobFair() {
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState(false);
 
-    // const user = {
-    //     email: "abhijithkannan452@gmail.com",
-    //     firstName: "A",
-    //     lastName: "BB",
-    //     phone: 1236851234,
-    //     institute: "CEK",
-    //     branch: "EEE",
-    //     CGPA: 1.25,
-    //     backlog: 0,
-    //     membershipId: undefined,
-    //     yearofPassout: 2021,
-    //     ieeeMember:false,
-    //     resume: undefined,
-    //     package: 250,
-    //     courseType: undefined
-    // }
-
     const user = {
-        email: "",
-        firstName: "",
-        lastName: "",
-        phone: undefined,
-        institute: "",
-        branch: "",
-        CGPA: "",
+        email: "abhijithkannan452@gmail.com",
+        firstName: "Abhijith",
+        lastName: "Kannan",
+        phone: 1236851234,
+        institute: "CEK",
+        branch: "EEE",
+        CGPA: 1.25,
         backlog: 0,
         membershipId: undefined,
-        yearofPassout: undefined,
-        ieeeMember: undefined,
+        yearofPassout: 2021,
+        ieeeMember:false,
         resume: undefined,
-        package: undefined,
+        package: 250,
         courseType: undefined
     }
+
+    // const user = {
+    //     email: "",
+    //     firstName: "",
+    //     lastName: "",
+    //     phone: undefined,
+    //     institute: "",
+    //     branch: "",
+    //     CGPA: "",
+    //     backlog: 0,
+    //     membershipId: undefined,
+    //     yearofPassout: undefined,
+    //     ieeeMember: undefined,
+    //     resume: undefined,
+    //     package: undefined,
+    //     courseType: undefined
+    // }
 
     async function displayRazorpay(data, values) {
         const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
@@ -270,7 +270,7 @@ export default function JobFair() {
                                             setFieldValue={setFieldValue}
                                             errors={errors} />
                                         <Select
-                                            label="Year of passout *"
+                                            label="Year of graduation *"
                                             options={yop}
                                             name="yearofPassout"
                                             value={[{ value: values["yearofPassout"], label: values["yearofPassout"] }]}
@@ -284,7 +284,7 @@ export default function JobFair() {
                                             setFieldValue={setFieldValue}
                                             errors={errors}></Input>
                                         <Select
-                                            label="Are an IEEE member? *"
+                                            label="Are you an IEEE member? *"
                                             options={options}
                                             name="ieeeMember"
                                             value={[{ value: values["ieeeMember"], label: values["ieeeMember"] ? "Yes" : values["ieeeMember"] !== undefined ? "No" : undefined }]}
