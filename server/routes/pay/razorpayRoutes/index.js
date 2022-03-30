@@ -113,6 +113,7 @@ router.post("/", upload.single("resume"), async (req, res) => {
             currency: "INR",
             receipt: generateRandomString()
         };
+        // console.log(options.receipt)
         instance.orders.create(options, function (err, order) {
 
             order.key = process.env.razorPayId
