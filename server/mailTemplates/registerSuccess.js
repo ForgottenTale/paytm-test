@@ -584,7 +584,7 @@ module.exports = function (req) {
                             <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 15px 0px 16px;font-family:arial,helvetica,sans-serif;" align="left">
 
                               <div class="v-line-height" style="line-height: 140%; text-align: center; word-wrap: break-word;">
-                                <p dir="ltr" style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 16px; line-height: 22.4px;"><span style="line-height: 22.4px; font-size: 16px;"><span style="line-height: 22.4px; font-size: 16px;">Dear <span style="color: #001041; font-size: 16px; line-height: 22.4px;"><strong>Alan Mathew Uluvathu</strong></span></span>
+                                <p dir="ltr" style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 16px; line-height: 22.4px;"><span style="line-height: 22.4px; font-size: 16px;"><span style="line-height: 22.4px; font-size: 16px;">Dear <span style="color: #001041; font-size: 16px; line-height: 22.4px;"><strong>${req.name}</strong></span></span>
                                   </span><span style="line-height: 22.4px; font-size: 16px;"><strong><span style="line-height: 22.4px; color: #001041; font-size: 16px;"><br /></span><br /></strong>Thank you for registering to <strong><span style="color: #f39c12; font-size: 16px; line-height: 22.4px;">IEEE Job Fair 2022</span>. </strong>Your
                                   registration and payment has been received<strong>.<br /></strong></span>
                                   </span>
