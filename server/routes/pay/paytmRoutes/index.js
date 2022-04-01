@@ -74,7 +74,7 @@ router.post("/callback", async (req, res) => {
             //     txnId: response.responseObject.body.txnId,
             // })
             // notify(true, response.responseObject.body, applicant.email);
-            return res.redirect(process.env.NODE_ENV === "production" ? `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}` : `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}`)
+            return res.redirect(process.env.NODE_ENV === "production" ? `http://ieee-mint.org/confirmation/jobfair/${req.body.ORDERID}` : `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}`)
 
         }
         else {
