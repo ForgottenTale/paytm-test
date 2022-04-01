@@ -19,34 +19,35 @@ const fileStorage = multer.diskStorage({
 
 const upload = multer({ storage: fileStorage })
 
-router.post("/", upload.single("resume"), async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         var txnId = await generateTxnId(req)
 
-        const applicant = new Applicant({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            institute: req.body.institute,
-            branch: req.body.branch,
-            yearofPassout: req.body.yearofPassout,
-            CGPA: req.body.CGPA,
-            backlog: req.body.backlog,
-            ieeeMember: req.body.ieeeMember,
-            resume: req.file.path,
-            orderId: txnId.orderId,
-            amount: txnId.TXN_AMOUNT,
-            paymentStatus: "Pending",
-            bankId: "Pending",
-            txnDate: "Pending",
-            txnId: "Pending"
-        })
-        applicant.save()
-            .then(() => res.send(txnId))
-            .catch((err) => {
-                logger.error(err)
-                res.status(400).send({ error: err.message })
-            })
+        // const applicant = new Applicant({
+        //     firstName: req.body.firstName,
+        //     lastName: req.body.lastName,
+        //     email: req.body.email,
+        //     institute: req.body.institute,
+        //     branch: req.body.branch,
+        //     yearofPassout: req.body.yearofPassout,
+        //     CGPA: req.body.CGPA,
+        //     backlog: req.body.backlog,
+        //     ieeeMember: req.body.ieeeMember,
+        //     resume: req.file.path,
+        //     orderId: txnId.orderId,
+        //     amount: txnId.TXN_AMOUNT,
+        //     paymentStatus: "Pending",
+        //     bankId: "Pending",
+        //     txnDate: "Pending",
+        //     txnId: "Pending"
+        // })
+        // applicant.save()
+        //     .then(() => res.send(txnId))
+        //     .catch((err) => {
+        //         logger.error(err)
+        //         res.status(400).send({ error: err.message })
+        //     })
+        res.send(txnId)
     }
     catch (err) {
         logger.error(err)
@@ -65,26 +66,26 @@ router.post("/callback", async (req, res) => {
 
         if (response.responseObject.body.resultInfo.resultStatus === "TXN_SUCCESS") {
 
-            const applicant = await Applicant.findOneAndUpdate({ orderId: req.body.ORDERID }, {
-                amount: response.responseObject.body.txnAmount,
-                paymentStatus: "success",
-                bankId: response.responseObject.body.bankTxnId,
-                txnDate: response.responseObject.body.txnDate,
-                txnId: response.responseObject.body.txnId,
-            })
-            notify(true, response.responseObject.body, applicant.email);
-            return res.redirect(process.env.NODE_ENV === "production" ? `https://form.ieee-mint.org/confirmation/jobfair/${req.body.ORDERID}` : `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}`)
+            // const applicant = await Applicant.findOneAndUpdate({ orderId: req.body.ORDERID }, {
+            //     amount: response.responseObject.body.txnAmount,
+            //     paymentStatus: "success",
+            //     bankId: response.responseObject.body.bankTxnId,
+            //     txnDate: response.responseObject.body.txnDate,
+            //     txnId: response.responseObject.body.txnId,
+            // })
+            // notify(true, response.responseObject.body, applicant.email);
+            return res.redirect(process.env.NODE_ENV === "production" ? `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}` : `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}`)
 
         }
         else {
-            await Applicant.findOneAndUpdate({ orderId: req.body.ORDERID }, {
-                paymentStatus: "failed",
-                bankId: "failed",
-                txnDate: response.responseObject.body.txnDate,
-                txnId: response.responseObject.body.txnId
-            })
-            notify(false, response.responseObject.body, applicant.email);
-            return res.redirect(process.env.NODE_ENV === "production" ? `https://form.ieee-mint.org/confirmation/jobfair/${req.body.ORDERID}` : `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}`)
+            // await Applicant.findOneAndUpdate({ orderId: req.body.ORDERID }, {
+            //     paymentStatus: "failed",
+            //     bankId: "failed",
+            //     txnDate: response.responseObject.body.txnDate,
+            //     txnId: response.responseObject.body.txnId
+            // })
+            // notify(false, response.responseObject.body, applicant.email);
+            return res.redirect(process.env.NODE_ENV === "production" ? `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}` : `http://localhost:3000/confirmation/jobfair/${req.body.ORDERID}`)
         }
 
     }
@@ -93,6 +94,25 @@ router.post("/callback", async (req, res) => {
         logger.error(err)
     }
 
+})
+
+router.get("/order", async (req, res) => {
+
+    console.log(req.query.orderId)
+    try {
+        var orderId = req.query.orderId;
+        var readTimeout = 80000;
+        var paymentStatusDetailBuilder = new Paytm.PaymentStatusDetailBuilder(orderId);
+        var paymentStatusDetail = paymentStatusDetailBuilder.setReadTimeout(readTimeout).build();
+        var response = await Paytm.Payment.getPaymentStatus(paymentStatusDetail);
+
+        
+        res.send(response)
+    }
+    catch (err) {
+        res.status(400).send(err)
+        logger.error(err)
+    }
 })
 
 module.exports = router;

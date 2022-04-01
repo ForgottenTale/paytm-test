@@ -9,7 +9,7 @@ const { connectToPaytm } = require('./server/modules/paytm');
 const fs = require('fs')
 
 const payRoute = require('./server/routes/pay');
-const formRoute = require('./server/routes/form')
+const formRoute = require('./server/routes/form');
 const app = express();
 const port = process.env.PORT || 5000
 

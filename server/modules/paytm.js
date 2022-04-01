@@ -29,7 +29,7 @@ function connectToPaytm() {
     try {
       var channelId = Paytm.EChannelId.WEB;
       var orderId = generateRandomString(10);
-      var txnAmount = Paytm.Money.constructWithCurrencyAndValue(Paytm.EnumCurrency.INR, req.body.ieeeMember === "true" ? "250.00" : "500.00");
+      var txnAmount = Paytm.Money.constructWithCurrencyAndValue(Paytm.EnumCurrency.INR, req.body.amount );
       var userInfo = new Paytm.UserInfo(generateRandomString(10));
       userInfo.setEmail(req.body.email);
       userInfo.setFirstName(req.body.firstName);
