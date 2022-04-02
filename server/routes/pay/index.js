@@ -4,9 +4,11 @@ const logger = require('../../utils/logger');
 const router = express.Router();
 const razorPayRoutes = require('./razorpayRoutes');
 const paytmRoutes = require('./paytmRoutes');
+const razorpayTestRoutes = require('./razorpayTestRoutes');
 
 
 router.use("/razorpay",razorPayRoutes);
+router.use("/razorpayTest",razorpayTestRoutes);
 router.use("/paytm",paytmRoutes);
 
 
