@@ -83,6 +83,9 @@ export default function Responses() {
                 loading ? <Loader msg="Loading data" /> :
                     <div>
                         <h3>Responses</h3>
+                        <p>Total responses : {data.length}</p> 
+                        <p>Success : {data.filter((e)=>e.paymentStatus==="success").length} Pending : {data.filter((e)=>e.paymentStatus==="Pending").length} Failed : {data.filter((e)=>e.paymentStatus==="failed").length}</p>                    
+
                         <div className="responses_tools">
                             <Input onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for users, email address..." />
                             <div className="responses_buttons">
